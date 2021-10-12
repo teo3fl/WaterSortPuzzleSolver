@@ -22,7 +22,7 @@ public class ColorSample : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     public void Delete()
     {
-        container.DeleteColor(gameObject);
+        container.DeleteElement(gameObject);
     }
 
     public void ChangeColor()

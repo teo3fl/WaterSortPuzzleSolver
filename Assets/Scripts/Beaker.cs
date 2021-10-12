@@ -11,7 +11,7 @@ public class Beaker : MonoBehaviour
     [SerializeField]
     private GameObject go_contentSample;
 
-    // container
+    public BeakerContainer container;
 
     public void AddColor()
     {
@@ -23,8 +23,8 @@ public class Beaker : MonoBehaviour
         t_addButton.SetSiblingIndex(0);
     }
 
-    public void DeleteColor(GameObject color)
+    public void Delete()
     {
-        Destroy(color);
+        // do something
     }
 }

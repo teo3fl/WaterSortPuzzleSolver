@@ -34,6 +34,6 @@ public class BeakerContent : MonoBehaviour, IDropHandler
 
     public void Delete()
     {
-        beaker.DeleteColor(gameObject);
+        Destroy(gameObject);
     }
 }
