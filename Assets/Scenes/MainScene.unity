@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 731646755}
   - component: {fileID: 731646754}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ButtonAddColorSample
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -440,8 +440,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000061035156}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0.000038146973}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &739970678
 MonoBehaviour:
@@ -1517,6 +1517,8 @@ MonoBehaviour:
   t_container: {fileID: 739970677}
   go_colorSample: {fileID: 769916177338230397, guid: 668618e3134d39e4a86f956525901f76, type: 3}
   colorPicker: {fileID: 760653830}
+  t_addButton: {fileID: 731646753}
+  scrollBar: {fileID: 2146894638}
 --- !u!1 &2146894636
 GameObject:
   m_ObjectHideFlags: 0

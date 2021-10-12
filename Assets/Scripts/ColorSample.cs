@@ -18,7 +18,7 @@ public class ColorSample : MonoBehaviour
 
     public void Delete()
     {
-        Destroy(gameObject);
+        container.DeleteColor(gameObject);
     }
 
     public void ChangeColor()
