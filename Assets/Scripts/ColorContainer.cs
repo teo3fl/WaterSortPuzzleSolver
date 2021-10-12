@@ -16,6 +16,9 @@ public class ColorContainer : MonoBehaviour
     [SerializeField]
     private Scrollbar scrollBar;
 
+    public GameObject go_colorBall;
+    public Canvas canvas;
+
     private ColorSample lastPickedSample;
 
     private float f_initialContainerHeight;
