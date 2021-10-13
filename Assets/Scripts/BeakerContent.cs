@@ -8,6 +8,26 @@ public class BeakerContent : MonoBehaviour, IDropHandler
     private RectTransform rectTransform;
 
     public Beaker beaker;
+    private ColorSample colorSource;
+    private ColorSample ColorSource
+    {
+        get { return colorSource; }
+        set
+        {
+            if (colorSource)
+            {
+                colorSource.onColorChanged -= OnColorSourceChangeColor;
+                colorSource.onDelete -= OnColorSourceDeletion;
+            }
+
+            colorSource = value;
+
+            colorSource.onColorChanged += OnColorSourceChangeColor;
+            colorSource.onDelete += OnColorSourceDeletion;
+
+            image.color = colorSource.Color;
+        }
+    }
 
     private float f_width;
 
@@ -30,12 +50,22 @@ public class BeakerContent : MonoBehaviour, IDropHandler
     {
         if (eventData.pointerDrag)
         {
-            image.color = eventData.pointerDrag.GetComponent<ColorBall>().Color;
+            ColorSource = eventData.pointerDrag.GetComponent<ColorBall>().source;
         }
     }
 
     public void Delete()
     {
         Destroy(gameObject);
+    }
+
+    private void OnColorSourceChangeColor(Color newColor)
+    {
+        image.color = newColor;
+    }
+
+    private void OnColorSourceDeletion()
+    {
+        Delete();
     }
 }

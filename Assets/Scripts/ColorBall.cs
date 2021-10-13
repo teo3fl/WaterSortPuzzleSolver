@@ -13,9 +13,10 @@ public class ColorBall : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     public Canvas canvas;
     public Color Color
     {
-        get { return image.color; }
         set { image.color = value; }
     }
+
+    public ColorSample source;
 
 
     public void OnPointerDown(PointerEventData eventData)

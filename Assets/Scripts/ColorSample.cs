@@ -10,10 +10,20 @@ public class ColorSample : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     public Color Color
     {
         get { return image.color; }
-        set { image.color = value; }
+        set 
+        { 
+            image.color = value;
+            onColorChanged?.Invoke(value);
+        }
     }
 
+    public delegate void ColorChangeHandler(Color newColor);
+    public delegate void DeleteHandler();
+    public ColorChangeHandler onColorChanged;
+    public DeleteHandler onDelete;
+
     public ColorContainer container;
+
 
     private void Start()
     {
@@ -22,6 +32,7 @@ public class ColorSample : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     public void Delete()
     {
+        onDelete?.Invoke();
         container.DeleteElement(gameObject);
     }
 
@@ -37,12 +48,15 @@ public class ColorSample : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        var colorBall = Instantiate(container.go_colorBall, container.canvas.transform);
-        colorBall.transform.position = eventData.position;
-        colorBall.GetComponent<ColorBall>().Color = Color;
-        colorBall.GetComponent<ColorBall>().canvas = container.canvas;
+        var colorBallPrefab = Instantiate(container.go_colorBall, container.canvas.transform);
+        colorBallPrefab.transform.position = eventData.position;
 
-        eventData.pointerDrag = colorBall;
+        var colorBall = colorBallPrefab.GetComponent<ColorBall>();
+        colorBall.Color = Color;
+        colorBall.source = this;
+        colorBall.canvas = container.canvas;
+
+        eventData.pointerDrag = colorBallPrefab;
 
         Debug.Log("Begin drag");
     }
