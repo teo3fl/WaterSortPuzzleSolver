@@ -7,7 +7,6 @@ public class BeakerContent : MonoBehaviour, IDropHandler
     private Image image;
     private RectTransform rectTransform;
 
-    private Beaker beaker;
     private ColorSample colorSource;
     public ColorSample ColorSource
     {
@@ -32,7 +31,7 @@ public class BeakerContent : MonoBehaviour, IDropHandler
     private float f_width;
 
 
-    public void Initialize(Beaker beaker, float height, ColorSample colorSample)
+    public void Initialize(float height, ColorSample colorSample)
     {
         image = GetComponent<Image>();
         rectTransform = GetComponent<RectTransform>();
@@ -40,7 +39,6 @@ public class BeakerContent : MonoBehaviour, IDropHandler
         f_width = rectTransform.sizeDelta.x;
         Resize(height);
 
-        this.beaker = beaker;
         ColorSource = colorSample;
     }
 

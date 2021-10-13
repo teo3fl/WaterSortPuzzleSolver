@@ -87,7 +87,7 @@ public class Beaker : MonoBehaviour
 
         var sample = Instantiate(go_contentSample, t_contents).GetComponent<BeakerContent>();
 
-        sample.Initialize(this, contentHeight, container.DefaultColorSample);
+        sample.Initialize(contentHeight, container.DefaultColorSample);
         sample.transform.SetSiblingIndex(1);
 
         t_addButton.SetSiblingIndex(0);
@@ -97,5 +97,20 @@ public class Beaker : MonoBehaviour
     {
         onCapacityChanged -= OnCapacitychanged;
         container.DeleteElement(gameObject);
+    }
+
+    public BeakerData GetData()
+    {
+        var stack = new Stack<int>();
+        for(int i = t_contents.childCount-1; i>0;--i)
+        {
+            stack.Push(t_contents.GetChild(i).GetComponent<BeakerContent>().ColorSource.ID);
+        }
+
+        while(stack.Count < maxCapacity)
+        {
+            stack.Push(0);
+        }
+        return new BeakerData() { contents = stack };
     }
 }

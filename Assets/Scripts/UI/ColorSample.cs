@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class ColorSample : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
+    public int ID { get; set; } = 1;
     private Image image;
     public Color Color
     {

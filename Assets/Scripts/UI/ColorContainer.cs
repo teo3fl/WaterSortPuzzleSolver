@@ -15,6 +15,8 @@ public class ColorContainer : ContainerManager
 
     private ColorSample lastPickedSample;
 
+    private int idCounter = 1;
+
 
     public void RequestcolorChange(ColorSample sample)
     {
@@ -38,6 +40,7 @@ public class ColorContainer : ContainerManager
     {
         var sample = Instantiate(go_colorSample, t_container).GetComponent<ColorSample>();
         sample.container = this;
+        sample.ID = ++idCounter;
     }
 
     protected override float GetContentHeight()

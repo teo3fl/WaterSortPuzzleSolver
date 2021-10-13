@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,5 +30,16 @@ public class BeakerContainer : ContainerManager
         var beaker = Instantiate(go_beaker, t_container).GetComponent<Beaker>();
         beaker.container = this;
         beaker.Initialize();
+    }
+
+    public List<BeakerData> GetBeakers()
+    {
+        var list = new List<BeakerData>();
+        for(int i = 0; i< t_container.childCount - 1; ++i)
+        {
+            list.Add(t_container.GetChild(i).GetComponent<Beaker>().GetData());
+        }
+
+        return list;
     }
 }
