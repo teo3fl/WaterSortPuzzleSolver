@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -98,9 +98,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0.23964591, b: 0.9716981, a: 1}
-    m_HighlightedColor: {r: 0.18396229, g: 0.38468134, b: 1, a: 1}
-    m_PressedColor: {r: 0, g: 0.1577907, b: 0.6415094, a: 1}
+    m_NormalColor: {r: 0, g: 0, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.16509432, g: 0.16509432, b: 1, a: 1}
+    m_PressedColor: {r: 0, g: 0, b: 0.8679245, a: 1}
     m_SelectedColor: {r: 0, g: 0.2392157, b: 0.9725491, a: 1}
     m_DisabledColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
     m_ColorMultiplier: 1
@@ -195,8 +195,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967040
+  m_fontColor: {r: 0, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

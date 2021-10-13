@@ -11,12 +11,14 @@ public class BeakerContent : MonoBehaviour, IDropHandler
 
     private float f_width;
 
-    private void Start()
+    public void Initialize(float height)
     {
         image = GetComponent<Image>();
         rectTransform = GetComponent<RectTransform>();
 
         f_width = rectTransform.sizeDelta.x;
+
+        Resize(height);
     }
 
     public void Resize(float height)

@@ -8,7 +8,6 @@ public class BeakerContainer : ContainerManager
     [SerializeField]
     private GameObject go_beaker;
 
-
     protected override float GetContentHeight()
     {
         // numberOfRows = (childCount * cellSize.x + (childCount - 1 ) * gridLayoutGroup.spacing.x) / width
@@ -27,5 +26,6 @@ public class BeakerContainer : ContainerManager
     {
         var beaker = Instantiate(go_beaker, t_container).GetComponent<Beaker>();
         beaker.container = this;
+        beaker.Initialize();
     }
 }
