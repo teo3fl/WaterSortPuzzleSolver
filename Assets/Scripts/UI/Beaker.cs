@@ -20,6 +20,7 @@ public class Beaker : MonoBehaviour
     private static int maxCapacity = 2;
     public static int MaxCapacity
     {
+        get { return maxCapacity; }
         set
         {
             maxCapacity = value;
