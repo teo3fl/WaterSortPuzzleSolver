@@ -19,6 +19,6 @@ public class CapacitySlider : MonoBehaviour
     public void OnValueChanged()
     {
         txt_value.text = slider.value.ToString();
-        Beaker.MaxCapacity = (int)slider.value;
+        BeakerUI.MaxCapacity = (int)slider.value;
     }
 }

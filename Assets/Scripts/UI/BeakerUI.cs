@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Beaker : MonoBehaviour
+public class BeakerUI : MonoBehaviour
 {
     [SerializeField]
     private Transform t_contents;
@@ -100,18 +100,13 @@ public class Beaker : MonoBehaviour
         container.DeleteElement(gameObject);
     }
 
-    public BeakerData GetData()
+    public Beaker GetData()
     {
         var stack = new Stack<int>();
         for(int i = t_contents.childCount-1; i>0;--i)
         {
             stack.Push(t_contents.GetChild(i).GetComponent<BeakerContent>().ColorSource.ID);
         }
-
-        while(stack.Count < maxCapacity)
-        {
-            stack.Push(0);
-        }
-        return new BeakerData() { contents = stack };
+        return new Beaker(stack);
     }
 }

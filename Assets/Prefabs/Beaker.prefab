@@ -183,8 +183,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 716369260382548348}
-        m_TargetAssemblyTypeName: Beaker, Assembly-CSharp
+      - m_Target: {fileID: 3449736472446505931}
+        m_TargetAssemblyTypeName: BeakerUI, Assembly-CSharp
         m_MethodName: AddColor
         m_Mode: 1
         m_Arguments:
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 716369260382548345}
   - component: {fileID: 716369260382548347}
   - component: {fileID: 716369260382548346}
-  - component: {fileID: 716369260382548348}
+  - component: {fileID: 3449736472446505931}
   m_Layer: 5
   m_Name: Beaker
   m_TagString: Untagged
@@ -309,7 +309,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &716369260382548348
+--- !u!114 &3449736472446505931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -318,11 +318,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 716369260382548344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bc3af971b03cec4b9846f70605ea0dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 7602d554dabe8974abe649f675446add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   t_contents: {fileID: 716369258490845823}
-  t_addButton: {fileID: 716369259246469574}
+  t_addButton: {fileID: 716369259994719157}
   go_contentSample: {fileID: 7159819510586358517, guid: 6bb19adb2da347543b117f7678b79238, type: 3}
   container: {fileID: 0}
 --- !u!1001 &716369259878461841
@@ -423,14 +423,14 @@ PrefabInstance:
     - target: {fileID: 1666276334654320006, guid: 54161c103beae8849a2c92c02a3ef1ea, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 716369260382548348}
+      objectReference: {fileID: 3449736472446505931}
     - target: {fileID: 1666276334654320006, guid: 54161c103beae8849a2c92c02a3ef1ea, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Delete
       objectReference: {fileID: 0}
     - target: {fileID: 1666276334654320006, guid: 54161c103beae8849a2c92c02a3ef1ea, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Beaker, Assembly-CSharp
+      value: BeakerUI, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54161c103beae8849a2c92c02a3ef1ea, type: 3}

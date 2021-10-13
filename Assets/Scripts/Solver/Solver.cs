@@ -26,7 +26,7 @@ public class Solver : MonoBehaviour
         }
     }
 
-    private bool CheckData(List<BeakerData> data, ref string errorMessage)
+    private bool CheckData(List<Beaker> data, ref string errorMessage)
     {
         // check the min number of beakers
 
@@ -42,16 +42,14 @@ public class Solver : MonoBehaviour
 
         var contentCounter = new Dictionary<int, int>();
 
-        foreach (BeakerData beaker in data)
+        foreach (Beaker beaker in data)
         {
-            foreach (int id in beaker.contents)
+            foreach (int id in beaker.Contents)
             {
-                if (id != 0)
-                {
-                    if (!contentCounter.ContainsKey(id))
-                        contentCounter.Add(id, 0);
-                    ++contentCounter[id];
-                }
+                if (!contentCounter.ContainsKey(id))
+                    contentCounter.Add(id, 0);
+                ++contentCounter[id];
+
             }
         }
 
@@ -71,7 +69,7 @@ public class Solver : MonoBehaviour
         }
 
         // check if each color has maxCapacity apparitions
-        int maxCapacity = Beaker.MaxCapacity;
+        int maxCapacity = BeakerUI.MaxCapacity;
 
         foreach (KeyValuePair<int, int> pair in contentCounter)
         {
@@ -90,8 +88,45 @@ public class Solver : MonoBehaviour
         StopAllCoroutines();
     }
 
-    private IEnumerator Calculate(List<BeakerData> data)
+    private IEnumerator Calculate(List<Beaker> data)
     {
-        yield return 0;
+        Beaker.maxCapacity = BeakerUI.MaxCapacity;
+
+        var opened = new SortedSet<State>(new StateComparer());
+        var closed = new List<State>();
+
+        opened.Add(new State(data));
+
+
+        while (opened.Count > 0 && !opened.Max.IsFinal)
+        {
+            var currentState = opened.Max;
+            opened.Remove(currentState);
+
+            var children = currentState.Expand();
+            foreach (var child in children)
+            {
+                if (!closed.Contains(child))
+                    opened.Add(child);
+            }
+
+            closed.Add(currentState);
+
+            yield return 0;
+        }
+
+        HandleSolution(opened.Count > 0 ? opened.Max : null);
+    }
+
+    private void HandleSolution(State final)
+    {
+        if(final != null)
+        {
+            // display solution
+        }
+        else
+        {
+            // no solution
+        }
     }
 }

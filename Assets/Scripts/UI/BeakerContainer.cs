@@ -27,17 +27,17 @@ public class BeakerContainer : ContainerManager
 
     protected override void InstantiateElement()
     {
-        var beaker = Instantiate(go_beaker, t_container).GetComponent<Beaker>();
+        var beaker = Instantiate(go_beaker, t_container).GetComponent<BeakerUI>();
         beaker.container = this;
         beaker.Initialize();
     }
 
-    public List<BeakerData> GetBeakers()
+    public List<Beaker> GetBeakers()
     {
-        var list = new List<BeakerData>();
+        var list = new List<Beaker>();
         for(int i = 0; i< t_container.childCount - 1; ++i)
         {
-            list.Add(t_container.GetChild(i).GetComponent<Beaker>().GetData());
+            list.Add(t_container.GetChild(i).GetComponent<BeakerUI>().GetData());
         }
 
         return list;
