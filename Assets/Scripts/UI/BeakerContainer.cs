@@ -7,6 +7,10 @@ public class BeakerContainer : ContainerManager
 {
     [SerializeField]
     private GameObject go_beaker;
+    [SerializeField]
+    private ColorSample defaultColorSample;
+    public ColorSample DefaultColorSample { get { return defaultColorSample; } }
+
 
     protected override float GetContentHeight()
     {

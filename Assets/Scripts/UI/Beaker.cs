@@ -87,8 +87,7 @@ public class Beaker : MonoBehaviour
 
         var sample = Instantiate(go_contentSample, t_contents).GetComponent<BeakerContent>();
 
-        sample.beaker = this;
-        sample.Initialize(contentHeight);
+        sample.Initialize(this, contentHeight, container.DefaultColorSample);
         sample.transform.SetSiblingIndex(1);
 
         t_addButton.SetSiblingIndex(0);
