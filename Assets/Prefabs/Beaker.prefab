@@ -324,6 +324,7 @@ MonoBehaviour:
   t_contents: {fileID: 716369258490845823}
   t_addButton: {fileID: 716369259246469574}
   go_contentSample: {fileID: 7159819510586358517, guid: 6bb19adb2da347543b117f7678b79238, type: 3}
+  container: {fileID: 0}
 --- !u!1001 &716369259878461841
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -418,6 +419,18 @@ PrefabInstance:
     - target: {fileID: 1666276334654320001, guid: 54161c103beae8849a2c92c02a3ef1ea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1666276334654320006, guid: 54161c103beae8849a2c92c02a3ef1ea, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 716369260382548348}
+    - target: {fileID: 1666276334654320006, guid: 54161c103beae8849a2c92c02a3ef1ea, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Delete
+      objectReference: {fileID: 0}
+    - target: {fileID: 1666276334654320006, guid: 54161c103beae8849a2c92c02a3ef1ea, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Beaker, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54161c103beae8849a2c92c02a3ef1ea, type: 3}
