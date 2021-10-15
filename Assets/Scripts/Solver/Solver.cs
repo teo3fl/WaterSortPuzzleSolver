@@ -124,6 +124,8 @@ public class Solver : MonoBehaviour
 
             closed.Add(currentState);
 
+            dialogHUD.DisplaySolutionState(closed.Count,opened.Count);
+
             yield return 0;
         }
 
