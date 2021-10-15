@@ -27,9 +27,9 @@ public class ColorContainer : ContainerManager
 
     public Color GetColorBySampleId(int id)
     {
-        foreach (GameObject child in t_container)
+        for(int i= 0; i< t_container.childCount; ++i)
         {
-            var sample = child.GetComponent<ColorSample>();
+            var sample = t_container.GetChild(i).GetComponent<ColorSample>();
             if (sample.ID == id)
             {
                 return sample.Color;

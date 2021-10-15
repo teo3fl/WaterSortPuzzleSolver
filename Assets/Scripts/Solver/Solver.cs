@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,10 @@ public class Solver : MonoBehaviour
     private BeakerContainer beakerContainer;
     [SerializeField]
     private DialogHUD dialogHUD;
+    [SerializeField]
+    private GameObject go_solutionDisplayer;
+    [SerializeField]
+    private GameObject go_initializer;
 
 
     public void Begin()
@@ -115,18 +120,39 @@ public class Solver : MonoBehaviour
             yield return 0;
         }
 
-        HandleSolution(opened.Count > 0 ? opened.Max : null);
+        if (opened.Max != null)
+            HandleSolution(closed[0], opened.Max);
+        else
+            HandleFailure();
     }
 
-    private void HandleSolution(State final)
+    private void HandleFailure()
     {
-        if(final != null)
+
+    }
+
+    private void HandleSolution(State initial, State final)
+    {
+        dialogHUD.Display("Success", "Ok");
+        go_initializer.SetActive(false);
+        go_solutionDisplayer.SetActive(true);
+        go_solutionDisplayer.GetComponent<SolutionDisplayer>().Initialize(initial, GetActions(initial,final));
+    }
+
+    private List<Tuple<int, int>> GetActions(State initial,State final)
+    {
+        var list = new List<Tuple<int, int>>();
+
+        var currentState = final;
+
+        while(currentState!=initial)
         {
-            // display solution
+            list.Add(currentState.Action);
+            currentState = currentState.Parent;
         }
-        else
-        {
-            // no solution
-        }
+
+        list.Reverse();
+
+        return list;
     }
 }

@@ -38,16 +38,30 @@ public class SolutionDisplayer : MonoBehaviour
 
     public void Initialize(State initialState, List<Tuple<int, int>> actions)
     {
+        Clear();
+
         int idCounter = 1;
+        beakers = new List<ViewonlyBeaker>();
         foreach (Beaker beaker in initialState.Beakers)
         {
             var b = Instantiate(go_beaker, t_contents).GetComponent<ViewonlyBeaker>();
             b.Initialize(idCounter++, beaker.Contents);
+            beakers.Add(b);
         }
 
         steps = actions;
-        CurrentStep = 0;
         movedForward = true;
+        CurrentStep = 0;
+    }
+
+    private void Clear()
+    {
+        beakers = null;
+
+        for(int i = 0; i<t_contents.childCount;++i)
+        {
+            Destroy(t_contents.GetChild(i));
+        }
     }
 
     public void OnNextButtonclicked()
@@ -89,18 +103,24 @@ public class SolutionDisplayer : MonoBehaviour
             btn_previous.SetActive(true);
         }
 
-        if (CurrentStep == steps.Count - 1)
+        if (CurrentStep == steps.Count)
         {
             btn_next.SetActive(false);
         }
-        else if (CurrentStep == steps.Count - 2)
+        else if (CurrentStep == steps.Count - 1)
         {
             btn_next.SetActive(true);
+        }
+
+        if (currentStep == steps.Count)
+        {
+            txt_stepDescription.text = string.Empty; // allow the very last step to be displayed simply for seeing the result of the last step 
+            return;
         }
 
         var firstBeaker = steps[currentStep].Item1;
         var secondBeaker = steps[currentStep].Item2;
 
-        txt_stepDescription.text = $"Pour {firstBeaker} into {secondBeaker}";
+        txt_stepDescription.text = $"Pour {firstBeaker+1} into {secondBeaker+1}";
     }
 }
