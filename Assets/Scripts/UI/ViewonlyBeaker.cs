@@ -32,5 +32,6 @@ public class ViewonlyBeaker : MonoBehaviour
     {
         var top = t_contents.GetChild(0);
         top.SetParent(other.t_Contents);
+        top.SetAsFirstSibling();
     }
 }

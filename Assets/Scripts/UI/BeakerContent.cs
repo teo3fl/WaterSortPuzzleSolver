@@ -21,6 +21,8 @@ public class BeakerContent : MonoBehaviour, IDropHandler
 
             colorSource = value;
 
+            if (value == null) return;
+
             colorSource.onColorChanged += OnColorSourceChangeColor;
             colorSource.onDelete += OnColorSourceDeletion;
 
@@ -58,6 +60,12 @@ public class BeakerContent : MonoBehaviour, IDropHandler
     public void Delete()
     {
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        ColorSource = null;
+        Debug.Log("Destroyed beaker content");
     }
 
     private void OnColorSourceChangeColor(Color newColor)

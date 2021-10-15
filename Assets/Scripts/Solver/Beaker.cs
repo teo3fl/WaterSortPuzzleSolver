@@ -13,7 +13,7 @@ public class Beaker
 
     public Beaker(Beaker other)
     {
-        Contents = StackExtension.Clone(other.Contents);        
+        Contents = StackExtension.Clone(other.Contents);
     }
 
     public bool IsSorted()
@@ -41,7 +41,7 @@ public class Beaker
     {
         // can pour only if this is not empty AND ( other is empty OR ( has the same color on top && capacity != maxSize)
 
-        return Contents.Count > 0 && (other.Contents.Count == 0 || (other.Contents.Peek() == Contents.Peek()));
+        return Contents.Count > 0 && (other.Contents.Count == 0 || (other.Contents.Peek() == Contents.Peek()) && other.Contents.Count < maxCapacity);
     }
 
     public void PourInto(Beaker other)
