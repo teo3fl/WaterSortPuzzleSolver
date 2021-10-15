@@ -102,6 +102,13 @@ public class Solver : MonoBehaviour
 
         opened.Add(new State(data));
 
+        if(opened.Max.IsFinal)
+        {
+            dialogHUD.Display("This state is already final.", "Ok");
+            StopAllCoroutines();
+            yield return 0;
+        }
+
 
         while (opened.Count > 0 && !opened.Max.IsFinal)
         {
