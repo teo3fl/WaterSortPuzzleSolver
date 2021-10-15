@@ -85,4 +85,6 @@ public abstract class ContainerManager : MonoBehaviour
         yield return new WaitForSeconds(0.001f);
         scrollBar.value = value;
     }
+
+    public abstract void ResetContents();
 }

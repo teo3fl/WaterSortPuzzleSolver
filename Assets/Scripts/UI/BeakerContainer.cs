@@ -42,4 +42,12 @@ public class BeakerContainer : ContainerManager
 
         return list;
     }
+
+    public override void ResetContents()
+    {
+        for (int i = 0; i < t_container.childCount - 1; ++i)
+        {
+            Destroy(t_container.GetChild(i).gameObject);
+        }
+    }
 }

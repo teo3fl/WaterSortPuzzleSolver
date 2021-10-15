@@ -78,4 +78,12 @@ public class ColorContainer : ContainerManager
 
         return contentHeight;
     }
+
+    public override void ResetContents()
+    {
+        for(int i= 1; i<t_container.childCount-1;++i)
+        {
+            Destroy(t_container.GetChild(i).gameObject);
+        }
+    }
 }
