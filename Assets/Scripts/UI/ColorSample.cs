@@ -30,7 +30,6 @@ public class ColorSample : ColorBallSpawner
 
     public void Delete()
     {
-        onDelete?.Invoke();
         container.DeleteElement(gameObject);
     }
 
@@ -46,5 +45,10 @@ public class ColorSample : ColorBallSpawner
         colorBall.Initialize(this);
 
         return colorBallGO;
+    }
+
+    private void OnDestroy()
+    {
+        onDelete?.Invoke();
     }
 }
