@@ -15,6 +15,8 @@ public class SolutionDisplayer : MonoBehaviour
     private GameObject btn_previous;
     [SerializeField]
     private TMPro.TextMeshProUGUI txt_stepDescription;
+    [SerializeField]
+    private TMPro.TextMeshProUGUI txt_currentStep;
 
 
     private List<ViewonlyBeaker> beakers;
@@ -94,6 +96,8 @@ public class SolutionDisplayer : MonoBehaviour
 
     private void UpdateUI()
     {
+        txt_currentStep.text = $"{CurrentStep+1} / {steps.Count + 1}";
+
         if (CurrentStep == 0)
         {
             btn_previous.SetActive(false);
