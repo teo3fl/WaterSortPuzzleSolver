@@ -31,6 +31,6 @@ public class ViewonlyBeaker : MonoBehaviour
     public void PourInto(ViewonlyBeaker other)
     {
         var top = t_contents.GetChild(0);
-        top.parent = other.t_Contents;
+        top.SetParent(other.t_Contents);
     }
 }

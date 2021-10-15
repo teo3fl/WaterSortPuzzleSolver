@@ -38,8 +38,6 @@ public class SolutionDisplayer : MonoBehaviour
 
     public void Initialize(State initialState, List<Tuple<int, int>> actions)
     {
-        Clear();
-
         int idCounter = 1;
         beakers = new List<ViewonlyBeaker>();
         foreach (Beaker beaker in initialState.Beakers)
@@ -60,7 +58,7 @@ public class SolutionDisplayer : MonoBehaviour
 
         for(int i = 0; i<t_contents.childCount;++i)
         {
-            Destroy(t_contents.GetChild(i));
+            Destroy(t_contents.GetChild(i).gameObject);
         }
     }
 
@@ -124,5 +122,10 @@ public class SolutionDisplayer : MonoBehaviour
         var secondBeaker = steps[currentStep].Item2 + 1;
 
         txt_stepDescription.text = $"Pour {firstBeaker} into {secondBeaker}";
+    }
+
+    public void OnBackButtonPressed()
+    {
+        Clear();
     }
 }
