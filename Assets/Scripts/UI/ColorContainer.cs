@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ColorContainer : ContainerManager
 {
+    public static ColorContainer Instance { get; private set; }
+
     [SerializeField]
     private GameObject go_colorSample;
     [SerializeField]
@@ -17,6 +19,25 @@ public class ColorContainer : ContainerManager
 
     private int idCounter = 1;
 
+
+    private void Start()
+    {
+        Instance = this;
+    }
+
+    public Color GetColorBySampleId(int id)
+    {
+        foreach (GameObject child in t_container)
+        {
+            var sample = child.GetComponent<ColorSample>();
+            if (sample.ID == id)
+            {
+                return sample.Color;
+            }
+        }
+
+        throw new System.Exception($"Unable to find color sample with id = {id}.");
+    }
 
     public void RequestcolorChange(ColorSample sample)
     {

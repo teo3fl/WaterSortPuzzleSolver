@@ -25,10 +25,12 @@ public class BeakerUI : MonoBehaviour
         {
             maxCapacity = value;
             onCapacityChanged?.Invoke();
+            updatedContentHeight = false;
         }
     }
 
-    private float contentHeight;
+    public static float ContentHeight { get; private set; }
+    private static bool updatedContentHeight;
 
 
     public void Initialize()
@@ -45,7 +47,11 @@ public class BeakerUI : MonoBehaviour
 
     private void UpdatecontentHeight()
     {
-        contentHeight = (t_contents.GetComponent<RectTransform>().rect.height - t_addButton.GetComponent<RectTransform>().rect.height) / maxCapacity;
+        if (!updatedContentHeight)
+        {
+            ContentHeight = (t_contents.GetComponent<RectTransform>().rect.height - t_addButton.GetComponent<RectTransform>().rect.height) / maxCapacity;
+            updatedContentHeight = true;
+        }
     }
 
     private void OnCapacitychanged()
@@ -77,7 +83,7 @@ public class BeakerUI : MonoBehaviour
     {
         for (int i = 1; i < t_contents.childCount; ++i)
         {
-            t_contents.GetChild(i).GetComponent<BeakerContent>().Resize(contentHeight);
+            t_contents.GetChild(i).GetComponent<BeakerContent>().Resize(ContentHeight);
         }
     }
 
@@ -88,7 +94,7 @@ public class BeakerUI : MonoBehaviour
 
         var sample = Instantiate(go_contentSample, t_contents).GetComponent<BeakerContent>();
 
-        sample.Initialize(contentHeight, container.DefaultColorSample);
+        sample.Initialize(ContentHeight, container.DefaultColorSample);
         sample.transform.SetSiblingIndex(1);
 
         t_addButton.SetSiblingIndex(0);
