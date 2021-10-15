@@ -12,7 +12,7 @@ public abstract class ContainerManager : MonoBehaviour
     [SerializeField]
     private Scrollbar scrollBar;
 
-    private float f_initialContainerHeight;
+    protected float f_initialContainerHeight;
 
     private void Start()
     {

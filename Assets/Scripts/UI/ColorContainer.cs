@@ -23,6 +23,8 @@ public class ColorContainer : ContainerManager
     private void Start()
     {
         Instance = this;
+        var rectTransform = t_container.GetComponent<RectTransform>();
+        f_initialContainerHeight = rectTransform.rect.height;
     }
 
     public Color GetColorBySampleId(int id)
