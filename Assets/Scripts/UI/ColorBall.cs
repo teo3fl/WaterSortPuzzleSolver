@@ -10,7 +10,7 @@ public class ColorBall : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
     private RectTransform rectTransform;
     [SerializeField]
     private CanvasGroup canvasGroup;
-    public Canvas canvas;
+    private Canvas canvas;
     public Color Color
     {
         set { image.color = value; }
@@ -18,6 +18,13 @@ public class ColorBall : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, 
 
     public ColorSample source;
 
+
+    public void Initialize(ColorSample sample)
+    {
+        Color = sample.Color;
+        source = sample;
+        canvas = sample.container.canvas;
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {

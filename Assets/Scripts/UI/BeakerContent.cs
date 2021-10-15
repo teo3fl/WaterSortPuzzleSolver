@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class BeakerContent : MonoBehaviour, IDropHandler
+public class BeakerContent : ColorBallSpawner, IDropHandler
 {
     private Image image;
     private RectTransform rectTransform;
@@ -29,6 +29,9 @@ public class BeakerContent : MonoBehaviour, IDropHandler
             image.color = colorSource.Color;
         }
     }
+
+    [SerializeField]
+    private GameObject go_colorBall;
 
     private float f_width;
 
@@ -76,5 +79,14 @@ public class BeakerContent : MonoBehaviour, IDropHandler
     private void OnColorSourceDeletion()
     {
         Delete();
+    }
+
+    protected override GameObject InstantiateColorBall()
+    {
+        var colorBallGO = Instantiate(colorSource.container.go_colorBall, colorSource.container.canvas.transform);
+        var colorBall = colorBallGO.GetComponent<ColorBall>();
+        colorBall.Initialize(ColorSource);
+
+        return colorBallGO;
     }
 }

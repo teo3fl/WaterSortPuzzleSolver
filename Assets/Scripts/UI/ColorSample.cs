@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ColorSample : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class ColorSample : ColorBallSpawner
 {
     public int ID { get; set; } = 1;
     private Image image;
@@ -42,31 +39,12 @@ public class ColorSample : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         container.RequestcolorChange(this);
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    protected override GameObject InstantiateColorBall()
     {
-        Debug.Log("Pointer down");
-    }
+        var colorBallGO = Instantiate(container.go_colorBall, container.canvas.transform);
+        var colorBall = colorBallGO.GetComponent<ColorBall>();
+        colorBall.Initialize(this);
 
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        var colorBallPrefab = Instantiate(container.go_colorBall, container.canvas.transform);
-        colorBallPrefab.transform.position = eventData.position;
-
-        var colorBall = colorBallPrefab.GetComponent<ColorBall>();
-        colorBall.Color = Color;
-        colorBall.source = this;
-        colorBall.canvas = container.canvas;
-
-        eventData.pointerDrag = colorBallPrefab;
-
-        Debug.Log("Begin drag");
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
+        return colorBallGO;
     }
 }
