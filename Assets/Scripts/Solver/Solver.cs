@@ -128,7 +128,7 @@ public class Solver : MonoBehaviour
 
     private void HandleFailure()
     {
-
+        dialogHUD.Display("Failed to find a solution.", "Ok");
     }
 
     private void HandleSolution(State initial, State final)
