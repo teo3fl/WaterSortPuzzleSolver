@@ -106,6 +106,17 @@ public class BeakerUI : MonoBehaviour
         container.DeleteElement(gameObject);
     }
 
+    public void Fill()
+    {
+        if (t_contents.childCount-1 == maxCapacity)
+            return;
+
+        for(int i= t_contents.childCount-1; i<maxCapacity;++i)
+        {
+            AddColor();
+        }
+    }
+
     public Beaker GetData()
     {
         var stack = new Stack<int>();
