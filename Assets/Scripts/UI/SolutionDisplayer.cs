@@ -66,19 +66,21 @@ public class SolutionDisplayer : MonoBehaviour
 
     public void OnNextButtonclicked()
     {
-        ++CurrentStep;
         movedForward = true;
+        ++CurrentStep;
     }
 
     public void OnPreviousButtonClicked()
     {
-        --CurrentStep;
         movedForward = false;
+        --CurrentStep;
     }
 
     private void UpdateBeakers()
     {
-        var action = steps[CurrentStep- 1];
+        int actionIndex = movedForward ? CurrentStep - 1 : CurrentStep;
+
+        var action = steps[actionIndex];
         var firstBeaker = beakers[action.Item1];
         var secondBeaker = beakers[action.Item2];
 
@@ -118,9 +120,9 @@ public class SolutionDisplayer : MonoBehaviour
             return;
         }
 
-        var firstBeaker = steps[currentStep].Item1;
-        var secondBeaker = steps[currentStep].Item2;
+        var firstBeaker = steps[currentStep].Item1 + 1;
+        var secondBeaker = steps[currentStep].Item2 + 1;
 
-        txt_stepDescription.text = $"Pour {firstBeaker+1} into {secondBeaker+1}";
+        txt_stepDescription.text = $"Pour {firstBeaker} into {secondBeaker}";
     }
 }
