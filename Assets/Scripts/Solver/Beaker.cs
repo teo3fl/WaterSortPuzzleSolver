@@ -40,8 +40,30 @@ public class Beaker
     public bool CanPourInto(Beaker other) // returns true if this beaker can pour the top content onto the other beaker
     {
         // can pour only if this is not empty AND ( other is empty OR ( has the same color on top && capacity != maxSize)
+        bool isValidAction = Contents.Count > 0 && (other.Contents.Count == 0 || (other.Contents.Peek() == Contents.Peek()) && other.Contents.Count < maxCapacity);
 
-        return Contents.Count > 0 && (other.Contents.Count == 0 || (other.Contents.Peek() == Contents.Peek()) && other.Contents.Count < maxCapacity);
+        if (isValidAction)
+        {
+            // if the contents of this beaker have the same color && are pouring into an empty one, then there is no point
+            if (other.Contents.Count == 0)
+            {
+                if (Contents.Count == 1)
+                    return false; // empty recipient and a single content in this one
+
+                var contents = Contents.ToArray();
+                for (int i = 0; i < contents.Length-1; ++i)
+                {
+                    if (contents[i] != contents[i + 1])
+                        return true; // empty recipient but different contents contained in this one
+                }
+
+                return false; // empty recipient and same contents in this one
+             }
+
+            return true; // valid action, both beakers have contents
+        }
+
+        return false; // invalid action
     }
 
     public void PourInto(Beaker other)
