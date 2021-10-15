@@ -34,11 +34,11 @@ public class SolutionDisplayer : MonoBehaviour
         }
     }
 
-    private List<Tuple<int, int>> steps;
+    private List<Action> steps;
     bool movedForward;
 
 
-    public void Initialize(State initialState, List<Tuple<int, int>> actions)
+    public void Initialize(State initialState, List<Action> actions)
     {
         int idCounter = 1;
         beakers = new List<ViewonlyBeaker>();
@@ -58,7 +58,7 @@ public class SolutionDisplayer : MonoBehaviour
     {
         beakers = null;
 
-        for(int i = 0; i<t_contents.childCount;++i)
+        for (int i = 0; i < t_contents.childCount; ++i)
         {
             Destroy(t_contents.GetChild(i).gameObject);
         }
@@ -81,22 +81,16 @@ public class SolutionDisplayer : MonoBehaviour
         int actionIndex = movedForward ? CurrentStep - 1 : CurrentStep;
 
         var action = steps[actionIndex];
-        var firstBeaker = beakers[action.Item1];
-        var secondBeaker = beakers[action.Item2];
+        var firstBeaker = beakers[movedForward ? action.donnor : action.recipient];
+        var secondBeaker = beakers[movedForward ? action.recipient : action.donnor];
 
-        if (movedForward)
-        {
+        for (int i = 0; i < action.pouringCounter; ++i)
             firstBeaker.PourInto(secondBeaker);
-        }
-        else
-        {
-            secondBeaker.PourInto(firstBeaker);
-        }
     }
 
     private void UpdateUI()
     {
-        txt_currentStep.text = $"{CurrentStep+1} / {steps.Count + 1}";
+        txt_currentStep.text = $"{CurrentStep + 1} / {steps.Count + 1}";
 
         if (CurrentStep == 0)
         {
@@ -122,8 +116,8 @@ public class SolutionDisplayer : MonoBehaviour
             return;
         }
 
-        var firstBeaker = steps[currentStep].Item1 + 1;
-        var secondBeaker = steps[currentStep].Item2 + 1;
+        var firstBeaker = steps[currentStep].donnor + 1;
+        var secondBeaker = steps[currentStep].recipient + 1;
 
         txt_stepDescription.text = $"Pour {firstBeaker} into {secondBeaker}";
     }

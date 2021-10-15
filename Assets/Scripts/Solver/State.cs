@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class State
 {
     public State Parent { get; private set; }
-    public Tuple<int, int> Action { get; private set; }
+    public Action Action { get; private set; }
     public List<Beaker> Beakers { get; private set; }
 
     public bool IsFinal { get; private set; }
@@ -21,7 +21,7 @@ public class State
         SetScore();
     }
 
-    public State(State parent, Tuple<int, int> action)
+    public State(State parent, Action action)
     {
         CopyListContent(parent.Beakers);
         Action = action;
@@ -44,9 +44,10 @@ public class State
 
     private void ProgressState()
     {
-        int donnorIndex = Action.Item1;
-        int recipientIndex = Action.Item2;
-        Beakers[donnorIndex].PourInto(Beakers[recipientIndex]);
+        var donnor = Beakers[Action.donnor];
+        var recipient = Beakers[Action.recipient];
+        
+        Action.pouringCounter= donnor.PourInto(recipient);
     }
 
     private void CheckIfFinal()
@@ -94,7 +95,7 @@ public class State
             {
                 if (i != j && Beakers[i].CanPourInto(Beakers[j]))
                 {
-                    children.Add(new State(this, Tuple.Create(i, j)));
+                    children.Add(new State(this, new Action() { donnor = i, recipient = j }));
                 }
             }
         }

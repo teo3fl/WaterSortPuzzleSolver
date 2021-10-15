@@ -51,14 +51,14 @@ public class Beaker
                     return false; // empty recipient and a single content in this one
 
                 var contents = Contents.ToArray();
-                for (int i = 0; i < contents.Length-1; ++i)
+                for (int i = 0; i < contents.Length - 1; ++i)
                 {
                     if (contents[i] != contents[i + 1])
                         return true; // empty recipient but different contents contained in this one
                 }
 
                 return false; // empty recipient and same contents in this one
-             }
+            }
 
             return true; // valid action, both beakers have contents
         }
@@ -66,14 +66,21 @@ public class Beaker
         return false; // invalid action
     }
 
-    public void PourInto(Beaker other)
+    public int PourInto(Beaker other)
     {
         if (!CanPourInto(other))
         {
             throw new System.Exception("Beaker.PourInto(): invalid action.");
         }
 
-        other.Contents.Push(Contents.Pop());
+        int pouringCounter = 0;
+        while (CanPourInto(other))
+        {
+            other.Contents.Push(Contents.Pop());
+            ++pouringCounter;
+        }
+
+        return pouringCounter;
     }
 
     // override object.Equals

@@ -146,9 +146,9 @@ public class Solver : MonoBehaviour
         go_solutionDisplayer.GetComponent<SolutionDisplayer>().Initialize(initial, GetActions(initial,final));
     }
 
-    private List<Tuple<int, int>> GetActions(State initial,State final)
+    private List<Action> GetActions(State initial,State final)
     {
-        var list = new List<Tuple<int, int>>();
+        var list = new List<Action>();
 
         var currentState = final;
 
