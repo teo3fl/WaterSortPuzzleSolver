@@ -13,7 +13,7 @@ public class Beaker
 
     public Beaker(Beaker other)
     {
-        Contents = new Stack<int>(other.Contents);
+        Contents = StackExtension.Clone(other.Contents);        
     }
 
     public bool IsSorted()
@@ -90,7 +90,7 @@ public class Beaker
 
         string binary = string.Empty;
 
-        foreach(var content in Contents)
+        foreach (var content in Contents)
         {
             binary += Convert.ToString(content, 2).PadLeft(4, '0');
         }
