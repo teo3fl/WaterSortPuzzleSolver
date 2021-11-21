@@ -115,8 +115,12 @@ public class BeakerUI : MonoBehaviour
 
     public void Delete()
     {
-        onCapacityChanged -= OnCapacitychanged;
         container.DeleteElement(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        onCapacityChanged -= OnCapacitychanged;
     }
 
     public void Fill()

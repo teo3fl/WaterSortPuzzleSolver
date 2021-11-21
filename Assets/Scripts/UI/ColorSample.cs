@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class ColorSample : ColorBallSpawner
 {
     public int ID { get; set; } = 1;
+    [SerializeField]
     private Image image;
     public Color Color
     {
@@ -22,11 +23,6 @@ public class ColorSample : ColorBallSpawner
 
     public ColorContainer container;
 
-
-    private void Start()
-    {
-        image = GetComponent<Image>();
-    }
 
     public void Delete()
     {

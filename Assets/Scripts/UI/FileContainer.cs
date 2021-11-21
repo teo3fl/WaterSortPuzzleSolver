@@ -47,7 +47,7 @@ public class FileContainer : ContainerManager
     private void AddElement(string text)
     {
         var button = Instantiate(go_listElement, t_container).GetComponent<ScrollListButton>();
-        button.Initialize(text);
+        button.Initialize(text, this);
     }
 
     public void Select(ScrollListButton button)

@@ -71,6 +71,13 @@ public class ColorContainer : ContainerManager
         sample.ID = ++idCounter;
     }
 
+    protected void InstantiateElement(ColorSampleData data)
+    {
+        var sample = Instantiate(go_colorSample, t_container).GetComponent<ColorSample>();
+        sample.container = this;
+        sample.SetData(data);
+    }
+
     protected override float GetContentHeight()
     {
         float contentHeight = 0f;
@@ -112,9 +119,7 @@ public class ColorContainer : ContainerManager
 
         for (int i = 1; i < colors.Count; i++)
         {
-            AddElement();
-            var lastAddedColorSample = t_container.GetChild(i).GetComponent<ColorSample>();
-            lastAddedColorSample.SetData(colors[i]);
+            InstantiateElement(colors[i]);
         }
 
         OnContentCountChanged();

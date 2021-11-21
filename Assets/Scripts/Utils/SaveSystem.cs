@@ -43,9 +43,9 @@ public class SaveSystem : MonoBehaviour
     public void DisplayLoadDialog()
     {
         // display UI
-        PopulateFileList();
         go_dialogBox.SetActive(true);
         go_loadSpecifficElements.SetActive(true);
+        PopulateFileList();
     }
 
     private void PopulateFileList()

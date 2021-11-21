@@ -1,7 +1,8 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ScrollListButton : MonoBehaviour
+public class ScrollListButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler, IPointerDownHandler
 {
     [SerializeField]
     private Color normal;
@@ -18,11 +19,12 @@ public class ScrollListButton : MonoBehaviour
     private FileContainer container;
 
 
-    public void Initialize(string text)
+    public void Initialize(string text, FileContainer fileContainer)
     {
         fileName = text;
         GetComponentInChildren<TMPro.TextMeshProUGUI>().text = text;
         background = GetComponent<Image>();
+        container = fileContainer;
 
         SetColor(normal);
     }
@@ -33,26 +35,29 @@ public class ScrollListButton : MonoBehaviour
         isSelected = false;
     }
 
-    private void OnMouseUp()
+    public void OnPointerUp(PointerEventData eventData)
     {
-        container.Select(this);
-        SetColor(selected);
-        isSelected = true;
-    }
-
-    private void OnMouseEnter()
-    {
-        if(!isSelected)
+        if (isSelected)
         {
-            SetColor(highlighted);
+            container.Deselect();
         }
         else
         {
-            container.Select(null);
+            container.Select(this);
+            SetColor(selected);
+            isSelected = true;
         }
     }
 
-    private void OnMouseExit()
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (!isSelected)
+        {
+            SetColor(highlighted);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
     {
         if (!isSelected)
         {
@@ -63,5 +68,10 @@ public class ScrollListButton : MonoBehaviour
     private void SetColor(Color color)
     {
         background.color = color;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+
     }
 }
