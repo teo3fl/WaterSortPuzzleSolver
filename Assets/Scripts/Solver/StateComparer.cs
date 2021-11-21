@@ -4,6 +4,10 @@ public class StateComparer : IComparer<State>
 {
     public int Compare(State x, State y)
     {
-        return x.Score.CompareTo(y.Score);
+        var result = x.Score.CompareTo(y.Score);
+        if (result == 0)
+            return 1;
+
+        return result;
     }
 }
