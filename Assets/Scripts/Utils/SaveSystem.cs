@@ -38,7 +38,7 @@ public class SaveSystem : MonoBehaviour
         // display UI
         go_dialogBox.SetActive(true);
         go_saveSpecifficElements.SetActive(true);
-        PopulateFileList();
+        StartCoroutine(DisplayFileList());
     }
 
     public void DisplayLoadDialog()
@@ -46,6 +46,12 @@ public class SaveSystem : MonoBehaviour
         // display UI
         go_dialogBox.SetActive(true);
         go_loadSpecifficElements.SetActive(true);
+        StartCoroutine(DisplayFileList());
+    }
+
+    private IEnumerator DisplayFileList()
+    {
+        yield return new WaitForSeconds(0.1f);
         PopulateFileList();
     }
 
