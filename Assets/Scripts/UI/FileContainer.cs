@@ -50,6 +50,11 @@ public class FileContainer : ContainerManager
         button.Initialize(text, this);
     }
 
+    public void DeleteSelectedElement()
+    {
+        DeleteElement(LastSelected.gameObject);
+    }
+
     public void Select(ScrollListButton button)
     {
         LastSelected = button;

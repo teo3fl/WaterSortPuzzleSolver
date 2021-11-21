@@ -16,6 +16,8 @@ public class SaveSystem : MonoBehaviour
     private GameObject go_saveSpecifficElements;
     [SerializeField]
     private GameObject go_loadSpecifficElements;
+    [SerializeField]
+    private GameObject go_deleteSpecifficElements;
 
     [SerializeField]
     private FileContainer fileNamesContainer;
@@ -46,6 +48,14 @@ public class SaveSystem : MonoBehaviour
         // display UI
         go_dialogBox.SetActive(true);
         go_loadSpecifficElements.SetActive(true);
+        StartCoroutine(DisplayFileList());
+    }
+
+    public void DisplayDeleteDialog()
+    {
+        // display UI
+        go_dialogBox.SetActive(true);
+        go_deleteSpecifficElements.SetActive(true);
         StartCoroutine(DisplayFileList());
     }
 
@@ -114,6 +124,20 @@ public class SaveSystem : MonoBehaviour
     public void OnLoadPressed()
     {
         StartCoroutine(LoadData());
+    }
+
+    public void OnDeletePressed()
+    {
+        var fileName = fileNamesContainer.SelectedItem;
+        if (fileName != string.Empty)
+        {
+            File.Delete(GetFullPath(fileName));
+            fileNamesContainer.DeleteSelectedElement();
+        }
+        else
+        {
+            dialogHUD.Display("No file was selected", "Close");
+        }
     }
 
     public void OnCancelPressed()
