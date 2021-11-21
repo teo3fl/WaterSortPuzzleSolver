@@ -29,12 +29,17 @@ public class ColorContainer : ContainerManager
 
     public Color GetColorBySampleId(int id)
     {
-        for(int i= 0; i< t_container.childCount; ++i)
+        return GetSampleById(id).Color;
+    }
+
+    public ColorSample GetSampleById(int id)
+    {
+        for (int i = 0; i < t_container.childCount; ++i)
         {
             var sample = t_container.GetChild(i).GetComponent<ColorSample>();
             if (sample.ID == id)
             {
-                return sample.Color;
+                return sample;
             }
         }
 
@@ -66,6 +71,13 @@ public class ColorContainer : ContainerManager
         sample.ID = ++idCounter;
     }
 
+    protected void InstantiateElement(ColorSampleData data)
+    {
+        var sample = Instantiate(go_colorSample, t_container).GetComponent<ColorSample>();
+        sample.container = this;
+        sample.SetData(data);
+    }
+
     protected override float GetContentHeight()
     {
         float contentHeight = 0f;
@@ -81,9 +93,40 @@ public class ColorContainer : ContainerManager
 
     public override void ResetContents()
     {
-        for(int i= 1; i<t_container.childCount-1;++i)
+        for (int i = 1; i < t_container.childCount - 1; ++i)
         {
             Destroy(t_container.GetChild(i).gameObject);
         }
+    }
+
+    public List<ColorSampleData> GetData()
+    {
+        var list = new List<ColorSampleData>();
+        for (int i = 0; i < t_container.childCount - 1; ++i)
+        {
+            list.Add(t_container.GetChild(i).GetComponent<ColorSample>().GetData());
+        }
+
+        return list;
+    }
+
+    public void LoadData(List<ColorSampleData> colors)
+    {
+        ResetContents();
+
+        var defaultSample = t_container.GetChild(0).GetComponent<ColorSample>();
+        defaultSample.SetData(colors[0]);
+
+        for (int i = 1; i < colors.Count; i++)
+        {
+            InstantiateElement(colors[i]);
+        }
+
+        OnContentCountChanged();
+        t_addButton.SetSiblingIndex(t_container.childCount - 1);
+
+        StartCoroutine(SetScrollBarValue(0f));
+
+        idCounter = colors[colors.Count - 1].id;
     }
 }

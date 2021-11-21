@@ -4,12 +4,24 @@ using UnityEngine.UI;
 
 public class BeakerContainer : ContainerManager
 {
+    public static BeakerContainer Instance { get; private set; }
+
     [SerializeField]
     private GameObject go_beaker;
     [SerializeField]
     private ColorSample defaultColorSample;
     public ColorSample DefaultColorSample { get { return defaultColorSample; } }
 
+    [SerializeField]
+    private Slider sl_beakerCapacity;
+
+
+    private void Start()
+    {
+        Instance = this;
+        var rectTransform = t_container.GetComponent<RectTransform>();
+        f_initialContainerHeight = rectTransform.rect.height;
+    }
 
     protected override float GetContentHeight()
     {
@@ -32,7 +44,15 @@ public class BeakerContainer : ContainerManager
         beaker.Initialize();
     }
 
-    public List<Beaker> GetBeakers()
+    private void InstantiateElement(Beaker data)
+    {
+        var beaker = Instantiate(go_beaker, t_container).GetComponent<BeakerUI>();
+        beaker.container = this;
+        beaker.Initialize();
+        beaker.SetData(data);
+    }
+
+    public List<Beaker> GetData()
     {
         var list = new List<Beaker>();
         for(int i = 0; i< t_container.childCount - 1; ++i)
@@ -41,6 +61,22 @@ public class BeakerContainer : ContainerManager
         }
 
         return list;
+    }
+
+    public void LoadData(List<Beaker> beakers, int maxCapacity)
+    {
+        ResetContents();
+        sl_beakerCapacity.value = maxCapacity;
+
+        foreach(var beakerData in beakers)
+        {
+            InstantiateElement(beakerData);
+        }
+
+        OnContentCountChanged();
+        t_addButton.SetSiblingIndex(t_container.childCount - 1);
+
+        StartCoroutine(SetScrollBarValue(0f));
     }
 
     public override void ResetContents()
