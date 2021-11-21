@@ -56,12 +56,12 @@ public class SolutionDisplayer : MonoBehaviour
 
     private void Clear()
     {
-        beakers = null;
-
-        for (int i = 0; i < t_contents.childCount; ++i)
+        for (int i = 0; i < beakers.Count; ++i)
         {
-            Destroy(t_contents.GetChild(i).gameObject);
+            Destroy(beakers[i].gameObject);
         }
+
+        beakers = null;
     }
 
     public void OnNextButtonclicked()
@@ -95,6 +95,7 @@ public class SolutionDisplayer : MonoBehaviour
         if (CurrentStep == 0)
         {
             btn_previous.SetActive(false);
+            btn_next.SetActive(true);
         }
         else if (CurrentStep == 1)
         {
