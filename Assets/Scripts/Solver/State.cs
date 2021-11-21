@@ -11,6 +11,8 @@ public class State
     public bool IsFinal { get; private set; }
     public int Score { get; private set; }
 
+    public string Value { get; private set; }
+
     public State(List<Beaker> beakers)
     {
         CopyListContent(beakers);
@@ -19,6 +21,8 @@ public class State
 
         CheckIfFinal();
         SetScore();
+
+        UpdateValue();
     }
 
     public State(State parent, Action action)
@@ -31,6 +35,8 @@ public class State
 
         CheckIfFinal();
         SetScore();
+
+        UpdateValue();
     }
 
     private void CopyListContent(List<Beaker> list)
@@ -114,48 +120,20 @@ public class State
         return false;
     }
 
-    // override object.Equals
-    public override bool Equals(object obj)
+    public void UpdateValue()
     {
-        //       
-        // See the full list of guidelines at
-        //   http://go.microsoft.com/fwlink/?LinkID=85237  
-        // and also the guidance for operator== at
-        //   http://go.microsoft.com/fwlink/?LinkId=85238
-        //
-
-        if (obj == null || GetType() != obj.GetType())
-        {
-            return false;
-        }
-
-        var other = obj as State;
-
-        foreach (var beaker in Beakers)
-        {
-            if (!other.Contains(beaker))
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    public override int GetHashCode()
-    {
-        var hashCodes = (from beaker in Beakers
-                         let code = beaker.GetHashCode()
+        var beakerValues = (from beaker in Beakers
+                         let code = beaker.Value
                          orderby code
                          select code).ToList();
 
-        string binary = string.Empty;
+        Value = string.Empty;
 
-        foreach (var code in hashCodes)
+        foreach (var value in beakerValues)
         {
-            binary += Convert.ToString(code, 2).PadLeft(4, '0');
+            Value += value.ToString() + '.';
         }
 
-        return Convert.ToInt32(binary, 2);
+        Value = Value.TrimEnd('.');
     }
 }

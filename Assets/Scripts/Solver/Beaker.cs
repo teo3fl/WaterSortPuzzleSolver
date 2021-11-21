@@ -7,14 +7,39 @@ public class Beaker
     public Stack<int> Contents { get; private set; }
     public static int maxCapacity;
 
+    public string Value { get; private set; } // used for checking equality
+
+
     public Beaker(Stack<int> contents)
     {
         Contents = contents;
+        UpdateValue();
     }
 
     public Beaker(Beaker other)
     {
         Contents = other.Contents.Clone();
+        Value = other.Value;
+    }
+
+    public void UpdateValue()
+    {
+        Value = string.Empty;
+
+        var contentsArray = Contents.ToArray();
+        for (int i = 0; i < contentsArray.Length; i++)
+        {
+            Value += contentsArray[i].ToString() + '.';
+        }
+
+        if (contentsArray.Length < maxCapacity)
+        {
+            for (int i = contentsArray.Length; i < maxCapacity; i++)
+            {
+                Value += "0.";
+            }
+        }
+        Value = Value.TrimEnd('.');
     }
 
     public bool IsSorted()
@@ -81,50 +106,9 @@ public class Beaker
             ++pouringCounter;
         }
 
+        UpdateValue();
+        other.UpdateValue();
+
         return pouringCounter;
-    }
-
-    // override object.Equals
-    public override bool Equals(object obj)
-    {
-        //       
-        // See the full list of guidelines at
-        //   http://go.microsoft.com/fwlink/?LinkID=85237  
-        // and also the guidance for operator== at
-        //   http://go.microsoft.com/fwlink/?LinkId=85238
-        //
-
-        if (obj == null || GetType() != obj.GetType())
-        {
-            return false;
-        }
-
-        var contents = Contents.ToArray();
-        var otherContents = (obj as Beaker).Contents.ToArray();
-
-        if (contents.Length != otherContents.Length)
-            return false;
-
-        for (int i = 0; i < contents.Length; ++i)
-        {
-            if (contents[i] != otherContents[i])
-                return false;
-        }
-
-        return true;
-    }
-
-    public override int GetHashCode()
-    {
-        // the ID of each content will be converted to binary (4 bits), then concatenated, then the result will be converted to base 10
-
-        string binary = string.Empty;
-
-        foreach (var content in Contents)
-        {
-            binary += Convert.ToString(content, 2).PadLeft(4, '0');
-        }
-
-        return Convert.ToInt32(binary, 2);
     }
 }

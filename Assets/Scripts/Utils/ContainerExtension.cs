@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 
-public static class StackExtension
+public static class ContainerExtension
 {
     public static Stack<T> Clone<T>(this Stack<T> stack)
     {
@@ -20,5 +21,18 @@ public static class StackExtension
         var list = new List<T>(stack);
         list.Reverse();
         return list;
+    }
+
+    public static bool ContainsValue(this List<State> list, State obj)
+    {
+        var value = obj.Value;
+
+        foreach(var item in list)
+        {
+            if (item.Value.Equals(value))
+                return true;
+        }
+
+        return false;
     }
 }

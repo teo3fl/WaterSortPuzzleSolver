@@ -118,7 +118,7 @@ public class Solver : MonoBehaviour
             var children = currentState.Expand();
             foreach (var child in children)
             {
-                if (!closed.Contains(child))
+                if (!closed.ContainsValue(child))
                     opened.Add(child);
             }
 
