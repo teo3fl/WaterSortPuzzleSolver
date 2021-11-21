@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -65,7 +66,7 @@ public class SaveSystem : MonoBehaviour
         string searchPattern = $"*.{extension}";
         try
         {
-            var files = new DirectoryInfo(Application.persistentDataPath + savePath).GetFiles(searchPattern,SearchOption.AllDirectories);
+            var files = new DirectoryInfo(Application.persistentDataPath + savePath).GetFiles(searchPattern, SearchOption.AllDirectories);
 
             foreach (var file in files)
             {
@@ -106,6 +107,21 @@ public class SaveSystem : MonoBehaviour
 
     public void OnLoadPressed()
     {
+        StartCoroutine(LoadData());
+    }
+
+    public void OnCancelPressed()
+    {
+        go_saveSpecifficElements.SetActive(false);
+        go_loadSpecifficElements.SetActive(false);
+        go_dialogBox.SetActive(false);
+    }
+
+
+    // functionality
+
+    private IEnumerator LoadData()
+    {
         // gather data
         var (colorData, beakerData, maxCapacity) = LoadData(fileNamesContainer.SelectedItem);
 
@@ -113,6 +129,19 @@ public class SaveSystem : MonoBehaviour
         try
         {
             ColorContainer.Instance.LoadData(colorData);
+        }
+        catch // the data wasn't loaded correctly
+        {
+            // reset the container
+            BeakerContainer.Instance.ResetContents();
+
+            dialogHUD.Display("Couldn't load the configuration from the given file.", "Close");
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        try
+        {
             BeakerContainer.Instance.LoadData(beakerData, maxCapacity);
 
             // the data was loaded correctly
@@ -131,16 +160,6 @@ public class SaveSystem : MonoBehaviour
         go_dialogBox.SetActive(false);
         go_loadSpecifficElements.SetActive(false);
     }
-
-    public void OnCancelPressed()
-    {
-        go_saveSpecifficElements.SetActive(false);
-        go_loadSpecifficElements.SetActive(false);
-        go_dialogBox.SetActive(false);
-    }
-
-
-    // functionality
 
     private void SaveData(Tuple<List<ColorSampleData>, List<Beaker>, int> data, string fileName)
     {

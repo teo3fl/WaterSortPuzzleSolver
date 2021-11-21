@@ -12,6 +12,10 @@ public class BeakerContainer : ContainerManager
     private ColorSample defaultColorSample;
     public ColorSample DefaultColorSample { get { return defaultColorSample; } }
 
+    [SerializeField]
+    private Slider sl_beakerCapacity;
+
+
     private void Start()
     {
         Instance = this;
@@ -62,7 +66,7 @@ public class BeakerContainer : ContainerManager
     public void LoadData(List<Beaker> beakers, int maxCapacity)
     {
         ResetContents();
-        BeakerUI.MaxCapacity = maxCapacity;
+        sl_beakerCapacity.value = maxCapacity;
 
         foreach(var beakerData in beakers)
         {
