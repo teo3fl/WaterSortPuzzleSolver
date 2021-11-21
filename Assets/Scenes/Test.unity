@@ -4314,7 +4314,19 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 825238097}
+        m_TargetAssemblyTypeName: FileContainer, Assembly-CSharp
+        m_MethodName: Deselect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -4332,19 +4344,7 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 825238097}
-        m_TargetAssemblyTypeName: FileContainer, Assembly-CSharp
-        m_MethodName: Deselect
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4833,6 +4833,7 @@ MonoBehaviour:
   scrollBar: {fileID: 1402335393}
   go_beaker: {fileID: 716369260382548344, guid: 0b993545d272ad847af73acaffb8208f, type: 3}
   defaultColorSample: {fileID: 1017432459}
+  sl_beakerCapacity: {fileID: 231827222}
 --- !u!1001 &1098048356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7627,6 +7628,7 @@ MonoBehaviour:
   scrollBar: {fileID: 96167948}
   go_beaker: {fileID: 716369260382548344, guid: 0b993545d272ad847af73acaffb8208f, type: 3}
   defaultColorSample: {fileID: 1017432459}
+  sl_beakerCapacity: {fileID: 0}
 --- !u!114 &2013078645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8686,7 +8688,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1027658315}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999999
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
