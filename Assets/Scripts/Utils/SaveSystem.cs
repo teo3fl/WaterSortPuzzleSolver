@@ -118,6 +118,7 @@ public class SaveSystem : MonoBehaviour
 
     public void OnCancelPressed()
     {
+        ClearInputField();
         go_saveSpecifficElements.SetActive(false);
         go_loadSpecifficElements.SetActive(false);
         go_dialogBox.SetActive(false);
@@ -142,6 +143,7 @@ public class SaveSystem : MonoBehaviour
             BeakerContainer.Instance.ResetContents();
 
             dialogHUD.Display("Couldn't load the configuration from the given file.", "Close");
+            yield break;
         }
 
         yield return new WaitForSeconds(0.1f);
@@ -160,8 +162,10 @@ public class SaveSystem : MonoBehaviour
             ColorContainer.Instance.ResetContents();
 
             dialogHUD.Display("Couldn't load the configuration from the given file.", "Close");
+            yield break;
         }
 
+        ClearInputField();
         // hide UI
         go_dialogBox.SetActive(false);
         go_loadSpecifficElements.SetActive(false);
