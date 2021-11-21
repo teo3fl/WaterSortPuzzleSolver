@@ -17,7 +17,7 @@ public class Solver : MonoBehaviour
 
     public void Begin()
     {
-        var data = beakerContainer.GetBeakers();
+        var data = beakerContainer.GetData();
         string errorMessage = string.Empty;
 
         if (CheckData(data, ref errorMessage))

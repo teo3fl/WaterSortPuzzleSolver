@@ -100,6 +100,19 @@ public class BeakerUI : MonoBehaviour
         t_addButton.SetSiblingIndex(0);
     }
 
+    public void AddColor(ColorSample colorSample)
+    {
+        if (t_contents.childCount - 1 >= maxCapacity)
+            return;
+
+        var sample = Instantiate(go_contentSample, t_contents).GetComponent<BeakerContent>();
+
+        sample.Initialize(ContentHeight, colorSample);
+        sample.transform.SetSiblingIndex(1);
+
+        t_addButton.SetSiblingIndex(0);
+    }
+
     public void Delete()
     {
         onCapacityChanged -= OnCapacitychanged;
@@ -108,22 +121,40 @@ public class BeakerUI : MonoBehaviour
 
     public void Fill()
     {
-        if (t_contents.childCount-1 == maxCapacity)
+        if (t_contents.childCount - 1 == maxCapacity)
             return;
 
-        for(int i= t_contents.childCount-1; i<maxCapacity;++i)
+        for (int i = t_contents.childCount - 1; i < maxCapacity; ++i)
         {
             AddColor();
+        }
+    }
+
+    private void ResetContents()
+    {
+        for (int i = 1; i < t_contents.childCount; i++)
+        {
+            Destroy(t_contents.GetChild(i));
         }
     }
 
     public Beaker GetData()
     {
         var stack = new Stack<int>();
-        for(int i = t_contents.childCount-1; i>0;--i)
+        for (int i = t_contents.childCount - 1; i > 0; --i)
         {
             stack.Push(t_contents.GetChild(i).GetComponent<BeakerContent>().ColorSource.ID);
         }
         return new Beaker(stack);
+    }
+
+    public void SetData(Beaker data)
+    {
+        ResetContents();
+
+        foreach(int colorId in data.Contents.ToList())
+        {
+            AddColor(ColorContainer.Instance.GetSampleById(colorId));
+        }
     }
 }

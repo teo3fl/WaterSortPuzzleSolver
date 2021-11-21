@@ -4,12 +4,20 @@ using UnityEngine.UI;
 
 public class BeakerContainer : ContainerManager
 {
+    public static BeakerContainer Instance { get; private set; }
+
     [SerializeField]
     private GameObject go_beaker;
     [SerializeField]
     private ColorSample defaultColorSample;
     public ColorSample DefaultColorSample { get { return defaultColorSample; } }
 
+    private void Start()
+    {
+        Instance = this;
+        var rectTransform = t_container.GetComponent<RectTransform>();
+        f_initialContainerHeight = rectTransform.rect.height;
+    }
 
     protected override float GetContentHeight()
     {
@@ -32,7 +40,7 @@ public class BeakerContainer : ContainerManager
         beaker.Initialize();
     }
 
-    public List<Beaker> GetBeakers()
+    public List<Beaker> GetData()
     {
         var list = new List<Beaker>();
         for(int i = 0; i< t_container.childCount - 1; ++i)
@@ -41,6 +49,19 @@ public class BeakerContainer : ContainerManager
         }
 
         return list;
+    }
+
+    public void LoadData(List<Beaker> beakers, int maxCapacity)
+    {
+        ResetContents();
+        BeakerUI.MaxCapacity = maxCapacity;
+
+        foreach(var beakerData in beakers)
+        {
+            AddElement();
+            var lastAddedBeaker = t_container.GetChild(t_container.childCount - 2).GetComponent<BeakerUI>();
+            lastAddedBeaker.SetData(beakerData);
+        }
     }
 
     public override void ResetContents()

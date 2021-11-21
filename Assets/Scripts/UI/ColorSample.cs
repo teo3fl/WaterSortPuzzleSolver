@@ -8,8 +8,8 @@ public class ColorSample : ColorBallSpawner
     public Color Color
     {
         get { return image.color; }
-        set 
-        { 
+        set
+        {
             image.color = value;
             onColorChanged?.Invoke(value);
         }
@@ -50,5 +50,26 @@ public class ColorSample : ColorBallSpawner
     private void OnDestroy()
     {
         onDelete?.Invoke();
+    }
+
+    public ColorSampleData GetData()
+    {
+        return new ColorSampleData() 
+        { 
+            id = ID, 
+            r = Color.r,
+            g = Color.g,
+            b = Color.b,
+            a = Color.a,
+        };
+    }
+
+    public void SetData(ColorSampleData data)
+    {
+        onColorChanged = null;
+        onDelete = null;
+
+        ID = data.id;
+        Color = new Color(data.r, data.g, data.b, data.a);
     }
 }

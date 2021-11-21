@@ -14,4 +14,11 @@ public static class StackExtension
 
         return newStack;
     }
+
+    public static List<T> ToList<T>(this Stack<T> stack)
+    {
+        var list = new List<T>(stack);
+        list.Reverse();
+        return list;
+    }
 }

@@ -8,7 +8,7 @@ public abstract class ContainerManager : MonoBehaviour
     [SerializeField]
     protected Transform t_container;
     [SerializeField]
-    private Transform t_addButton;
+    protected Transform t_addButton;
     [SerializeField]
     private Scrollbar scrollBar;
 
@@ -80,7 +80,7 @@ public abstract class ContainerManager : MonoBehaviour
 
     protected abstract float GetContentHeight();
 
-    private IEnumerator SetScrollBarValue(float value)
+    protected IEnumerator SetScrollBarValue(float value)
     {
         yield return new WaitForSeconds(0.001f);
         scrollBar.value = value;

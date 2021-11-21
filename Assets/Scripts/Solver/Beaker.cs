@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 
+[Serializable]
 public class Beaker
 {
     public Stack<int> Contents { get; private set; }
@@ -13,7 +14,7 @@ public class Beaker
 
     public Beaker(Beaker other)
     {
-        Contents = StackExtension.Clone(other.Contents);
+        Contents = other.Contents.Clone();
     }
 
     public bool IsSorted()
