@@ -160,5 +160,7 @@ public class BeakerUI : MonoBehaviour
         {
             AddColor(ColorContainer.Instance.GetSampleById(colorId));
         }
+
+        OnCapacitychanged();
     }
 }

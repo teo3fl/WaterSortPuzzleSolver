@@ -40,6 +40,14 @@ public class BeakerContainer : ContainerManager
         beaker.Initialize();
     }
 
+    private void InstantiateElement(Beaker data)
+    {
+        var beaker = Instantiate(go_beaker, t_container).GetComponent<BeakerUI>();
+        beaker.container = this;
+        beaker.Initialize();
+        beaker.SetData(data);
+    }
+
     public List<Beaker> GetData()
     {
         var list = new List<Beaker>();
@@ -58,10 +66,13 @@ public class BeakerContainer : ContainerManager
 
         foreach(var beakerData in beakers)
         {
-            AddElement();
-            var lastAddedBeaker = t_container.GetChild(t_container.childCount - 2).GetComponent<BeakerUI>();
-            lastAddedBeaker.SetData(beakerData);
+            InstantiateElement(beakerData);
         }
+
+        OnContentCountChanged();
+        t_addButton.SetSiblingIndex(t_container.childCount - 1);
+
+        StartCoroutine(SetScrollBarValue(0f));
     }
 
     public override void ResetContents()

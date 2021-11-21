@@ -93,7 +93,7 @@ public class ColorContainer : ContainerManager
 
     public override void ResetContents()
     {
-        for(int i= 1; i<t_container.childCount-1;++i)
+        for (int i = 1; i < t_container.childCount - 1; ++i)
         {
             Destroy(t_container.GetChild(i).gameObject);
         }
@@ -126,5 +126,7 @@ public class ColorContainer : ContainerManager
         t_addButton.SetSiblingIndex(t_container.childCount - 1);
 
         StartCoroutine(SetScrollBarValue(0f));
+
+        idCounter = colors[colors.Count - 1].id;
     }
 }
