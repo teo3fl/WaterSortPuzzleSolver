@@ -76,10 +76,7 @@ public class BeakerContainer : ContainerManager
             InstantiateElement(beakerData);
         }
 
-        OnContentCountChanged();
-        t_addButton.SetSiblingIndex(t_container.childCount - 1);
-
-        StartCoroutine(SetScrollBarValue(0f));
+       StartCoroutine(UpdateContainerHeight());
     }
 
     public override void ResetContents()

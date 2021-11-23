@@ -23,10 +23,7 @@ public abstract class ContainerManager : MonoBehaviour
     public void AddElement()
     {
         InstantiateElement();
-        OnContentCountChanged();
-        t_addButton.SetSiblingIndex(t_container.childCount - 1);
-
-        StartCoroutine(SetScrollBarValue(0f));
+        StartCoroutine(UpdateContainerHeight());
     }
 
     protected abstract void InstantiateElement();
@@ -41,6 +38,15 @@ public abstract class ContainerManager : MonoBehaviour
         Destroy(element);
         yield return new WaitForSeconds(0.01f);
         OnContentCountChanged();
+    }
+
+    protected IEnumerator UpdateContainerHeight()
+    {
+        yield return new WaitForSeconds(0.1f);
+        OnContentCountChanged();
+        t_addButton.SetSiblingIndex(t_container.childCount - 1);
+
+        yield return SetScrollBarValue(0f);
     }
 
     public void OnContentCountChanged()

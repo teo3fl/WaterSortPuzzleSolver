@@ -20,11 +20,14 @@ public class ColorContainer : ContainerManager
     private int idCounter = 1;
 
 
-    private void Start()
+    void Start()
     {
-        Instance = this;
-        var rectTransform = t_container.GetComponent<RectTransform>();
-        f_initialContainerHeight = rectTransform.rect.height;
+        if (Instance == null)
+        {
+            Instance = this;
+            var rectTransform = t_container.GetComponent<RectTransform>();
+            f_initialContainerHeight = rectTransform.rect.height;
+        }
     }
 
     public Color GetColorBySampleId(int id)
@@ -122,10 +125,7 @@ public class ColorContainer : ContainerManager
             InstantiateElement(colors[i]);
         }
 
-        OnContentCountChanged();
-        t_addButton.SetSiblingIndex(t_container.childCount - 1);
-
-        StartCoroutine(SetScrollBarValue(0f));
+        StartCoroutine(UpdateContainerHeight());
 
         idCounter = colors[colors.Count - 1].id;
     }
