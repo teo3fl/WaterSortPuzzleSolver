@@ -164,9 +164,9 @@ public class SaveSystem : MonoBehaviour
         catch // the data wasn't loaded correctly
         {
             // reset the container
-            BeakerContainer.Instance.ResetContents();
+            ColorContainer.Instance.ResetContents();
 
-            dialogHUD.Display("Couldn't load the configuration from the given file.", "Close");
+            dialogHUD.Display("Couldn't load the configuration (color samples) from the given file.", "Close");
             yield break;
         }
 
@@ -185,7 +185,7 @@ public class SaveSystem : MonoBehaviour
             BeakerContainer.Instance.ResetContents();
             ColorContainer.Instance.ResetContents();
 
-            dialogHUD.Display("Couldn't load the configuration from the given file.", "Close");
+            dialogHUD.Display("Couldn't load the configuration (beakers) from the given file.", "Close");
             yield break;
         }
 

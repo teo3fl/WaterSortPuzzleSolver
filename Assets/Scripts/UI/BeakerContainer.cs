@@ -18,9 +18,12 @@ public class BeakerContainer : ContainerManager
 
     private void Start()
     {
-        Instance = this;
-        var rectTransform = t_container.GetComponent<RectTransform>();
-        f_initialContainerHeight = rectTransform.rect.height;
+        if (Instance == null)
+        {
+            Instance = this;
+            var rectTransform = t_container.GetComponent<RectTransform>();
+            f_initialContainerHeight = rectTransform.rect.height;
+        }
     }
 
     protected override float GetContentHeight()
@@ -55,7 +58,7 @@ public class BeakerContainer : ContainerManager
     public List<Beaker> GetData()
     {
         var list = new List<Beaker>();
-        for(int i = 0; i< t_container.childCount - 1; ++i)
+        for (int i = 0; i < t_container.childCount - 1; ++i)
         {
             list.Add(t_container.GetChild(i).GetComponent<BeakerUI>().GetData());
         }
@@ -68,7 +71,7 @@ public class BeakerContainer : ContainerManager
         ResetContents();
         sl_beakerCapacity.value = maxCapacity;
 
-        foreach(var beakerData in beakers)
+        foreach (var beakerData in beakers)
         {
             InstantiateElement(beakerData);
         }
