@@ -21,8 +21,7 @@ public class BeakerContainer : ContainerManager
         if (Instance == null)
         {
             Instance = this;
-            var rectTransform = t_container.GetComponent<RectTransform>();
-            f_initialContainerHeight = rectTransform.rect.height;
+            UpdateBaseContainerHeight();
         }
     }
 

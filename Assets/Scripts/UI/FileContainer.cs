@@ -41,7 +41,7 @@ public class FileContainer : ContainerManager
             AddElement(file);
         }
 
-        OnContentCountChanged();
+        ResizeContainerHeight();
     }
 
     private void AddElement(string text)

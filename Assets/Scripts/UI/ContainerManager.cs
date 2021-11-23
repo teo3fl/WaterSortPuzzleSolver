@@ -14,10 +14,10 @@ public abstract class ContainerManager : MonoBehaviour
 
     protected float f_initialContainerHeight;
 
+
     private void Start()
     {
-        var rectTransform = t_container.GetComponent<RectTransform>();
-        f_initialContainerHeight = rectTransform.rect.height;
+        UpdateBaseContainerHeight();
     }
 
     public void AddElement()
@@ -37,20 +37,20 @@ public abstract class ContainerManager : MonoBehaviour
     {
         Destroy(element);
         yield return new WaitForSeconds(0.01f);
-        OnContentCountChanged();
+        ResizeContainerHeight();
     }
 
     protected IEnumerator UpdateContainerHeight(float delay = 0)
     {
         if (delay > 0)
             yield return new WaitForSeconds(delay);
-        OnContentCountChanged();
+        ResizeContainerHeight();
         t_addButton.SetSiblingIndex(t_container.childCount - 1);
 
         yield return SetScrollBarValue(0f);
     }
 
-    public void OnContentCountChanged()
+    public void ResizeContainerHeight()
     {
         // calculate the height of all elements in the container:
         // height = childCount * colorSamplePrefab + (childCount - 1) * verticalLayoutGroup.Spacing
@@ -83,6 +83,19 @@ public abstract class ContainerManager : MonoBehaviour
                 containerRect.offsetMin = new Vector2(containerRect.offsetMax.x, 0f);
             }
         }
+    }
+
+    public void OnWindowResize()
+    {
+        UpdateBaseContainerHeight();
+        ResizeContainerHeight();
+
+        StartCoroutine(SetScrollBarValue(0f));
+    }
+
+    protected void UpdateBaseContainerHeight()
+    {
+        f_initialContainerHeight = GetComponent<RectTransform>().rect.height;
     }
 
     protected abstract float GetContentHeight();
