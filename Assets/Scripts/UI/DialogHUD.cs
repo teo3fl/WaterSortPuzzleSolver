@@ -23,9 +23,9 @@ public class DialogHUD : MonoBehaviour
         SetActive(true);
     }
 
-    public void DisplaySolutionState(int processed, int pending)
+    public void DisplaySolutionState(int processed, int pending, System.DateTime elapsedTime)
     {
-        txt_stateCount.text = $"Processed {processed} states.\nPending: {pending}.";
+        txt_stateCount.text = $"Processed {processed} states.\nPending: {pending}.\nElapsed time: {elapsedTime.ToString("HH:mm:ss")}";
     }
 
     public void Display(string message, string buttonText, ClickHandler handler)

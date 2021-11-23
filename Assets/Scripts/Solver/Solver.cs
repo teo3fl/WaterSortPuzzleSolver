@@ -109,6 +109,7 @@ public class Solver : MonoBehaviour
             yield return 0;
         }
 
+        var elapsedTime = new DateTime();
 
         while (opened.Count > 0 && !opened.Max.IsFinal)
         {
@@ -124,7 +125,8 @@ public class Solver : MonoBehaviour
 
             closed.Add(currentState);
 
-            dialogHUD.DisplaySolutionState(closed.Count,opened.Count);
+            elapsedTime = elapsedTime.AddSeconds(Time.deltaTime);
+            dialogHUD.DisplaySolutionState(closed.Count,opened.Count,elapsedTime);
 
             yield return 0;
         }
