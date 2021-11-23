@@ -40,9 +40,10 @@ public abstract class ContainerManager : MonoBehaviour
         OnContentCountChanged();
     }
 
-    protected IEnumerator UpdateContainerHeight()
+    protected IEnumerator UpdateContainerHeight(float delay = 0)
     {
-        yield return new WaitForSeconds(0.1f);
+        if (delay > 0)
+            yield return new WaitForSeconds(delay);
         OnContentCountChanged();
         t_addButton.SetSiblingIndex(t_container.childCount - 1);
 
@@ -59,7 +60,7 @@ public abstract class ContainerManager : MonoBehaviour
         float contentHeight = GetContentHeight();
 
         RectTransform containerRect = t_container.GetComponent<RectTransform>();
-        float containerHeight = t_container.GetComponent<RectTransform>().rect.height; 
+        float containerHeight = t_container.GetComponent<RectTransform>().rect.height;
 
         if (containerHeight < contentHeight)
         {

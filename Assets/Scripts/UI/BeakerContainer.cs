@@ -76,7 +76,7 @@ public class BeakerContainer : ContainerManager
             InstantiateElement(beakerData);
         }
 
-       StartCoroutine(UpdateContainerHeight());
+       StartCoroutine(UpdateContainerHeight(0.1f));
     }
 
     public override void ResetContents()

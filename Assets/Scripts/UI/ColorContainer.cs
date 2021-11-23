@@ -125,7 +125,7 @@ public class ColorContainer : ContainerManager
             InstantiateElement(colors[i]);
         }
 
-        StartCoroutine(UpdateContainerHeight());
+        StartCoroutine(UpdateContainerHeight(0.1f));
 
         idCounter = colors[colors.Count - 1].id;
     }
