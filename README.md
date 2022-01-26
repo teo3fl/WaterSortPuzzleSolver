@@ -1,5 +1,5 @@
+<div id="top"></div>
 <!-- PROJECT LOGO -->
-<br />
 <div align="left">
     <img src=".Demo/icon_app_highrez.png" alt="Logo" width="80" height="80">
   </a>
@@ -20,14 +20,12 @@ It provides functionalities such as:
 * dragging and dropping colors from the color shade list, or from the beaker contents themselves
 * simple UI that displays step-by-step how to reach the solution for the given combination
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 <!-- Download -->
 ## Download
-Get the .zip [here](https://github.com/teo3fl/WaterSortPuzzleSolver/releases)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
+1. Get the .zip [here](https://github.com/teo3fl/WaterSortPuzzleSolver/releases)
+2. Extract
+3. Run "WaterSortPuzzleSolver.exe"
 
 
 <!-- USAGE EXAMPLES -->
