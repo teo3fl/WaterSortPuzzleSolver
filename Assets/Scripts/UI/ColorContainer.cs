@@ -25,7 +25,6 @@ public class ColorContainer : ContainerManager
         if (Instance == null)
         {
             Instance = this;
-            UpdateBaseContainerHeight();
         }
     }
 
@@ -80,19 +79,6 @@ public class ColorContainer : ContainerManager
         sample.SetData(data);
     }
 
-    protected override float GetContentHeight()
-    {
-        float contentHeight = 0f;
-        for (int i = 0; i < t_container.childCount; ++i)
-        {
-            contentHeight += t_container.GetChild(i).GetComponent<RectTransform>().rect.height;
-        }
-
-        contentHeight += (t_container.childCount - 1) * t_container.GetComponent<VerticalLayoutGroup>().spacing;
-
-        return contentHeight;
-    }
-
     public override void ResetContents()
     {
         for (int i = 1; i < t_container.childCount - 1; ++i)
@@ -124,7 +110,7 @@ public class ColorContainer : ContainerManager
             InstantiateElement(colors[i]);
         }
 
-        StartCoroutine(UpdateContainerHeight(0.1f));
+        SnapElements();
 
         idCounter = colors[colors.Count - 1].id;
     }

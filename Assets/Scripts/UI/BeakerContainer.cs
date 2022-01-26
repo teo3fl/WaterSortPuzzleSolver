@@ -21,22 +21,8 @@ public class BeakerContainer : ContainerManager
         if (Instance == null)
         {
             Instance = this;
-            UpdateBaseContainerHeight();
+            //UpdateBaseContainerHeight();
         }
-    }
-
-    protected override float GetContentHeight()
-    {
-        // numberOfRows = (childCount * cellSize.x + (childCount - 1 ) * gridLayoutGroup.spacing.x) / width
-        // height = numberOfRows * cellSize.y + (numberOfRows - 1) * gridLayoutGroup.spacing.y
-
-        var gridLayout = t_container.GetComponent<GridLayoutGroup>();
-        var cellSize = gridLayout.cellSize;
-        int childCount = t_container.childCount;
-
-        int numberOfRows = Mathf.FloorToInt((childCount * cellSize.x + (childCount - 1) * gridLayout.spacing.x) / t_container.GetComponent<RectTransform>().rect.width) + 1;
-
-        return numberOfRows * cellSize.y + (numberOfRows - 1) * gridLayout.spacing.y;
     }
 
     protected override void InstantiateElement()
@@ -75,7 +61,7 @@ public class BeakerContainer : ContainerManager
             InstantiateElement(beakerData);
         }
 
-       StartCoroutine(UpdateContainerHeight(0.1f));
+       SnapElements();
     }
 
     public override void ResetContents()

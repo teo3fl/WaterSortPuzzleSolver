@@ -12,97 +12,35 @@ public abstract class ContainerManager : MonoBehaviour
     [SerializeField]
     private Scrollbar scrollBar;
 
-    protected float f_initialContainerHeight;
-
-
-    private void Start()
-    {
-        UpdateBaseContainerHeight();
-    }
 
     public void AddElement()
     {
         InstantiateElement();
-        StartCoroutine(UpdateContainerHeight());
+        SnapElements();
     }
 
     protected abstract void InstantiateElement();
 
     public void DeleteElement(GameObject element)
     {
-        StartCoroutine(DeleteElementFromList(element));
-    }
-
-    private IEnumerator DeleteElementFromList(GameObject element)
-    {
         Destroy(element);
-        yield return new WaitForSeconds(0.01f);
-        ResizeContainerHeight();
     }
 
-    protected IEnumerator UpdateContainerHeight(float delay = 0)
+    protected void SnapElements()
     {
-        if (delay > 0)
-            yield return new WaitForSeconds(delay);
-        ResizeContainerHeight();
         t_addButton.SetSiblingIndex(t_container.childCount - 1);
-
-        yield return SetScrollBarValue(0f);
-    }
-
-    public void ResizeContainerHeight()
-    {
-        // calculate the height of all elements in the container:
-        // height = childCount * colorSamplePrefab + (childCount - 1) * verticalLayoutGroup.Spacing
-        // if the height of the content is greater than the current height of the container, change the current height 
-        // else if the height of the content is lesser, change the height but make it no less than the initial height
-
-        float contentHeight = GetContentHeight();
-
-        RectTransform containerRect = t_container.GetComponent<RectTransform>();
-        float containerHeight = t_container.GetComponent<RectTransform>().rect.height;
-
-        if (containerHeight < contentHeight)
-        {
-            containerRect.offsetMin = new Vector2(containerRect.offsetMax.x, containerHeight - contentHeight);
-        }
-        else
-        {
-            if (contentHeight >= f_initialContainerHeight)
-            {
-                float difference = f_initialContainerHeight - contentHeight;
-                float scrollBarValue = scrollBar.value;
-                containerRect.offsetMax = new Vector2(containerRect.offsetMax.x, 0);
-                containerRect.offsetMin = new Vector2(containerRect.offsetMax.x, difference);
-
-                StartCoroutine(SetScrollBarValue(scrollBarValue));
-            }
-            else
-            {
-                containerRect.offsetMax = new Vector2(containerRect.offsetMax.x, 0f);
-                containerRect.offsetMin = new Vector2(containerRect.offsetMax.x, 0f);
-            }
-        }
-    }
-
-    public void OnWindowResize()
-    {
-        UpdateBaseContainerHeight();
-        ResizeContainerHeight();
-
         StartCoroutine(SetScrollBarValue(0f));
     }
 
-    protected void UpdateBaseContainerHeight()
+   
+    public void OnWindowResize()
     {
-        f_initialContainerHeight = GetComponent<RectTransform>().rect.height;
+        StartCoroutine(SetScrollBarValue(0f));
     }
-
-    protected abstract float GetContentHeight();
 
     protected IEnumerator SetScrollBarValue(float value)
     {
-        yield return new WaitForSeconds(0.001f);
+        yield return new WaitForSeconds(0.05f);
         scrollBar.value = value;
     }
 

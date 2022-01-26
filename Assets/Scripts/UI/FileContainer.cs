@@ -40,8 +40,6 @@ public class FileContainer : ContainerManager
         {
             AddElement(file);
         }
-
-        ResizeContainerHeight();
     }
 
     private void AddElement(string text)
@@ -73,16 +71,6 @@ public class FileContainer : ContainerManager
         {
             Destroy(t_container.GetChild(i).gameObject);
         }
-    }
-
-    protected override float GetContentHeight()
-    {
-        if (t_container.childCount == 0)
-            return 0;
-
-        var elementHeight = t_container.GetChild(0).GetComponent<RectTransform>().rect.height;
-
-        return t_container.childCount * elementHeight;
     }
 
     protected override void InstantiateElement()
