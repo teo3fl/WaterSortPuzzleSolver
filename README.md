@@ -7,6 +7,7 @@
   <h1 align="left">Sort Puzzle Solver</h1>
 </div>
 
+### Run in browser on itch.io >>>> [here](https://teo3fl.itch.io/sort-puzzle-solver)
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
